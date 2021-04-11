@@ -1,0 +1,20 @@
+CREATE TABLE post (
+	userId int,    
+	id     int,   
+	title  varchar(100),
+	body   varchar(250),
+	PRIMARY KEY (id)	
+);
+
+
+
+
+CREATE TABLE comments (
+	Postid int,    
+	ID     int,    
+	Name   varchar(100), 
+	Email  varchar(100),
+	Body   varchar(250),
+	PRIMARY KEY (id),
+	FOREIGN KEY (postid) REFERENCES post(id)
+);

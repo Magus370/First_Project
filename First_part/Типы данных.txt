@@ -9,3 +9,19 @@
 Используйте ENUM вместо строк из фиксированного набора (например, списка стран).
 Используйте TIMESTAMP для простановки времени событий (регистрация, отправка сообщения и т.п.).
 Для остальных дат используйте DATETIME.
+
+
+CREATE TABLE post (
+  userId TINYINT,
+  ID SMALLINT,
+  title VARCHAR(40),
+  body VARCHAR(200),
+  PRIMARY KEY (userId)
+);
+
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+}

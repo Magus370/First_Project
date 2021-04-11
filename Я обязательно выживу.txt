@@ -1,0 +1,70 @@
+package main
+
+import (
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
+)
+
+type Post struct {
+	Userid int    `json:"userId"`
+	ID     int    `json:"id"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
+}
+
+func (Post) TableName() string {
+	return "post"
+}
+
+func main() {
+
+	go MakeRequest()
+
+	var input string
+	fmt.Scanln(&input)
+}
+
+func MakeRequest() {
+	resp, err := http.Get("https://jsonplaceholder.typicode.com/posts?id=1")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer resp.Body.Close()
+
+	var post []Post
+	/*
+
+			post := make(Post, 0)
+
+			err = json.Unmarshal(body, &post)
+			if err != nil {
+			fmt.Println(err)
+		}
+	*/
+	//json.Marshal(body)
+	json.Unmarshal(body, &post)
+	fmt.Println(post)
+	//fmt.Println(*post)
+
+	db, err := sql.Open("mysql", "root:dkvjeoc582@/Posts")
+
+	result, err := db.Exec("insert into posts.post (userId, ID, title, body) Values (?,?,?,?)", post)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(result.LastInsertId())
+
+}

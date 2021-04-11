@@ -1,0 +1,12 @@
+header {
+    background: #00b0d8 url(images/header-gradient.png) repeat-x;
+   }
+   .header-bg {
+    background: url(images/header-animal.png) repeat-x center bottom; 
+    height: 405px; /* Высота шапки */
+    text-align: center; /* Выравнивание по центру */
+   }
+   .header-bg img {
+    position: relative; /* Относительное позиционирование */
+    top: 40px; /* Сдвигаем картинку вниз */
+   }
